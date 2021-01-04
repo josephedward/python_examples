@@ -1,0 +1,1 @@
+**Uses Google Maps API, OpenWeatherMap API, and Python plotting library for geographic climate information**
