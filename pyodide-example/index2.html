@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.17.0/full/pyodide.js"></script>
+  </head>
+  <body>
+    Pyodide test page <br />
+    Open your browser console to see Pyodide output
+    <script type="text/javascript">
+      async function getWeather(key, units, city) {
+        let response = await axios.get(
+          `http://api.openweathermap.org/data/2.5/weather?appid=${key}&units=${units}&q=${city}`
+        );
+       
+        console.log(response.data);
+        let resObj = { data: response.data };
+        pyodide.registerJsModule("resObj", resObj);
+      }
+
+      async function main() {
+        await loadPyodide({
+          indexURL: "https://cdn.jsdelivr.net/pyodide/v0.17.0/full/",
+        });
+
+        let units = "imperial";
+        let weather_api_key = "d3104375bd592736cf8775886538ee2a";
+        let city = "richmond";
+
+        await getWeather(weather_api_key, units, city);
+
+        console.log(
+          pyodide.runPythonAsync(`
+            import sys
+            sys.version
+            import matplotlib.pyplot as plt
+            import numpy as np
+            import pandas as pd
+            import time
+            from resObj import data
+            import json
+            import pickle 
+
+
+            dates = []
+            city_names = []
+            cloudinesses = []
+            humidities = []
+            lngs = []
+            lats = []
+            wind_speeds = []
+            max_temps = []
+            
+            countries = []
+            pass_count = 0
+            set_count = 1
+
+            print(data.to_py())
+        `)
+        );
+      }
+      main();
+    </script>
+  </body>
+</html>
