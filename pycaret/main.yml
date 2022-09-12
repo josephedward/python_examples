@@ -1,0 +1,30 @@
+name: PyCaret AutoML Git Action
+on: 
+  push :
+    branches: [ master ]  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: PyCaret-Docker Git Action AutoML Example
+        id: model
+        uses: josephedward/pycaret_docker_githubactions@v1
+        with:
+          DATASET: "boston"
+          TARGET: "tax"
+          USECASE: "regression"
+      - name: Upload model.pkl
+        uses: actions/upload-artifact@v2
+        with: 
+          name: model
+          path: model.pkl
+      - name: Upload exp_github_logs.csv
+        uses: actions/upload-artifact@v2
+        with: 
+          name: experiment-logs
+          path: exp_github_logs.csv
+      - name: Upload logs.log
+        uses: actions/upload-artifact@v2
+        with: 
+          name: system-logs
+          path: logs.log
