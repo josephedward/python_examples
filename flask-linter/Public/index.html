@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1"> 
+        <title>ACE Linter</title>
+        <script src="https://ajaxorg.github.io/ace-builds/src-min-noconflict/ace.js" type="text/javascript"></script>
+        <script src="https://ajaxorg.github.io/ace-builds/src-min-noconflict/ext-language_tools.js" type="text/javascript"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <style type="text/css" media="screen">
+            #editor {
+                position: absolute;
+                top: 50px;
+                right: 10px;
+                left: 10px;
+                bottom: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <select id="languages">
+            <option value="JavaScript" selected>JavaScript</option>
+            <option value="HTML">HTML</option>
+            <option value="CSS">CSS</option>
+            <option value="PHP">PHP</option>
+            <option value="Java">Java</option>
+            <option value="C">C</option>
+            <option value="C++">C++</option>
+            <option value="C#">C#</option>
+            <option value="Ruby">Ruby</option>
+            <option value="Golang">Golang</option>
+            <option value="Python">Python</option>
+        </select>
+        <div id="editor"></div>
+        <script type="text/javascript" src="script.js"></script>
+    </body>
+
+</html>
